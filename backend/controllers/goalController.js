@@ -40,16 +40,16 @@ const updateGoal = asyncHandler(async (req, res) =>{
     }
 
     // finds the user
-    const user = await User.findById(req.user.id);
+    // const user = await User.findById(req.user.id);
 
     // check for user
-    if (!user){
+    if (!req.user){
         res.status(401)// not authorized
         throw new Error("User not found")
     }
 
     // Makes sure the logged in user matches the goal user
-    if (goal.user.toString() !== user.id){
+    if (goal.user.toString() !== req.user.id){
         res.status(401)
         throw new Error("User not authorized to edit this goal")
     }
@@ -71,16 +71,16 @@ const deleteGoal = asyncHandler(async (req, res) =>{
     }
 
     // finds the user
-    const user = await User.findById(req.user.id);
+    // const user = await User.findById(req.user.id);
 
     // check for user
-    if (!user){
+    if (!req.user){
         res.status(401)// not authorized
         throw new Error("User not found")
     }
 
     // Makes sure the logged in user matches the goal user
-    if (goal.user.toString() !== user.id){
+    if (goal.user.toString() !== req.user.id){
         res.status(401)
         throw new Error("User not authorized to delete this goal")
     }
